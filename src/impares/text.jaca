@@ -1,0 +1,29 @@
+import java.util.Random;
+
+public class Producto {
+    private int id;
+    private String codigo;
+    private String nombre;
+    private String marca;
+    private double precio;
+
+    public Producto(int id, String nombre, String marca, double precio) {
+        this.id = id;
+        this.nombre = nombre;
+        this.marca = marca;
+        this.precio = precio;
+        this.codigo = generarCodigo(nombre, marca);
+    }
+
+    private String generarCodigo(String nombre, String marca) {
+        String parte1 = nombre.substring(0, Math.min(3, nombre.length())).toUpperCase();
+        String parte2 = marca.substring(0, Math.min(2, marca.length())).toUpperCase();
+        int numeroAleatorio = new Random().nextInt(900) + 100;
+        return parte1 + parte2 + numeroAleatorio;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("Producto [ID=%d, Código=%s, Nombre=%s, Marca=%s, Precio=%.2f]", id, codigo, nombre, marca, precio);
+    }
+}
